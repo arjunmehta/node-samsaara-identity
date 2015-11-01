@@ -4,6 +4,8 @@ node_js:
   - "0.11"
   - "0.10"
   - "iojs-v2.5.0"
+  - "4.0"
+  - "4.1"
 branches:
   except:
     - image
