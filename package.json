@@ -10,16 +10,15 @@
         "browserify": "~10.2.4",
         "es5-shim": "~4.1.10",
         "ghostface": "~1.4.0",
-        "multiview": "~2.2.5",
+        "multiview": "~2.3.1",
         "phantomjs": "~1.9.18",
         "tape": "~4.2.0",
         "ws": "~0.8.0",
         "samsaara": "git://github.com/arjunmehta/node-samsaara.git"
     },
     "scripts": {
-        "test": "multiview [browserify test/client.js '|' ghostface] [tape test/test.js] -x 1000",
-        "test-multi": "multiview [browserify test/client.js '|' ghostface] [tape test/test.js]",
-        "test-clientremote": "browserify test/clientRemote.js | ghostface"
+        "test": "multiview [browserify test/client.js '|' ghostface] [tape test/test.js] -x 1000 -p",
+        "test-multi": "multiview [browserify test/client.js '|' ghostface] [tape test/test.js] -p"        
     },
     "keywords": [
         "samsaara",
