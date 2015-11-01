@@ -8,9 +8,9 @@ Identity middleware for [samsaara](https://www.github.com/arjunmehta/node-samsaa
 - **Have multiple connections represent the same identity (eg. a user or session).**
 - **Specifiy sub identities of a connection (eg. a specific http sessionID attached to a userID)**
 
-**Note:** *Use of this module requires familiarity with [samsaara](https://www.github.com/arjunmehta/node-samsaara) (of course). It's amazing and you'll love it. Get familiarized.*
-**Note:** *If you'd like to tie samsaara connections to an HTTP session, use **samsaara-http-session** in conjunction with **samsaara-identity**.*
-**Note:** *If you'd like to authenticate samsaara messages for added security use **samsaara-authentication** in conjunction with **samsaara-identity**.*
+**Note:** *Use of this module requires familiarity with [samsaara](https://www.github.com/arjunmehta/node-samsaara) (of course). It's amazing and you'll love it. Get familiarized.*<br/>
+**Note:** *If you'd like to tie samsaara connections to an HTTP session, use ***samsaara-http-session*** in conjunction with ***samsaara-identity***.*<br/>
+**Note:** *If you'd like to authenticate samsaara messages for added security use ***samsaara-authentication*** in conjunction with ***samsaara-identity***.*
 
 ## Installation
 
