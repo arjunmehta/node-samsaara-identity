@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/arjunmehta/node-samsaara-identity.svg?branch=1.0.0)](https://travis-ci.org/arjunmehta/node-samsaara-identity)
 
-Identity middleware for [samsaara](https://www.github.com/arjunmehta/node-samsaara). Use this module to:
+The identity middleware for [samsaara](https://www.github.com/arjunmehta/node-samsaara) is a powerful way of organizing connections. Use this module to:
 
 - **Attach an identity to and check the identity of samsaara connections. (This is usually done together with some kind of authentication.)**
 - **Have multiple connections represent the same identity (eg. a user or session).**
@@ -95,6 +95,54 @@ Now anything that identifies with sessionID will also identify with userID.
 ```javascript
 samsaara.identity('username', userID).connections // will include all connections from sessionID too.
 ```
+
+## API
+
+### Samsaara
+#### samsaara.identity(identityType, identityValue)
+Returns the `Identity` object with `identityValue` of `identityType`.
+
+#### samsaara.removeIdentityType(identityType)
+Removes all identities of `identityType` from samsaara.
+
+#### samsaara.addIdentityType(identityType)
+Adds an identity with `identityValue` of `identityType` to samsaara.
+
+#### samsaara.removeIdentity(identityType, identityValue)
+Removes the identity with `identityValue` of `identityType` from samsaara.
+
+### Connection
+#### connection.identifyAs(identityType, identityValue)
+Identifies the connection with `identityValue` for `identityType`.
+
+#### connection.unidentify(identityType)
+Clears the `identityType` identity from the connection.
+
+
+#### connection.identity(identityType)
+Returns the `identityValue` of the connection's `identityType` identity.
+
+#### connection.validateIdentity(identityType, identityValue)
+Returns a Boolean validating whether the connection is identified as (`identityType`, `identityValue`).
+
+### Identity
+#### identity.identifyAs(identityType, identityValue)
+Identifies the identity as a sub-identity of another identity.
+
+#### identity.unidentify(identityType)
+Makes the identity no longer a sub-identity of the `identityType`.
+
+#### identity.execute(methodName)(args, cb)
+Executes an exposed method on all connections attached to the identity.
+
+#### identity.nameSpace(nameSpaceName)
+Returns a samsaara nameSpace object for the identity. Executing methods within this namespace will execute the exposed method on all connections attached to the identity.
+
+#### identity.connections
+An Array of all the connections attached to the identity.
+
+#### identity.count
+The Number of connections attached to the identity.
 
 ## License
 The MIT License (MIT)

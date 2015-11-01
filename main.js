@@ -32,9 +32,9 @@ module.exports = {
 
     coreMethods: {
 
-        identity: function(type, id) {
-            if (identities[type] !== undefined && identities[type][id] !== undefined) {
-                return identities[type][id];
+        identity: function(type, value) {
+            if (identities[type] !== undefined && identities[type][value] !== undefined) {
+                return identities[type][value];
             }
 
             return null;
@@ -56,12 +56,12 @@ module.exports = {
             return identities[type];
         },
 
-        clearIdentity: function(type, id) {
+        clearIdentity: function(type, value) {
             var connections;
             var i;
 
-            if (identities[type] !== undefined && identities[type][id] !== undefined) {
-                connections = identities[type][id].connnections;
+            if (identities[type] !== undefined && identities[type][value] !== undefined) {
+                connections = identities[type][value].connnections;
                 for (i = 0; i < connections.length; i++) {
                     connections[i].unidentify(type);
                 }
@@ -75,7 +75,7 @@ module.exports = {
             return this.identities[type];
         },
 
-        identifyAs: function(type, id) {
+        identifyAs: function(type, value) {
 
             var connection = this;
             var identity;
@@ -84,11 +84,11 @@ module.exports = {
                 identities[type] = {};
             }
 
-            if (identities[type][id] === undefined) {
-                identity = new Identity(type, id);
-                identities[type][id] = identity;
+            if (identities[type][value] === undefined) {
+                identity = new Identity(type, value);
+                identities[type][value] = identity;
             } else {
-                identity = identities[type][id];
+                identity = identities[type][value];
             }
 
             identity.identifyConnection(connection.id);
@@ -106,8 +106,8 @@ module.exports = {
             }
         },
 
-        validateIdentity: function(type, id) {
-            if (this.identities[type] !== undefined && this.identities[type].id === id) {
+        validateIdentity: function(type, value) {
+            if (this.identities[type] !== undefined && this.identities[type].value === value) {
                 return true;
             }
 
