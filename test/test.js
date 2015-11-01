@@ -74,8 +74,8 @@ test('Wait for X Connections', function(t) {
 test('Hold Test', function(t) {
     setTimeout(function() {
         samsaara.connection('connection0').execute('continueTest')();
-        t.end();
     }, 500);
+    t.end();
 });
 
 test('Close Test', function(t) {
