@@ -1,0 +1,40 @@
+{
+    "name": "samsaara-identity",
+    "version": "1.0.0-beta.1",
+    "description": "Samsaara middleware to identify a connection.",
+    "main": "main.js",
+    "dependencies": {
+        "debugit": "~1.0.1"
+    },
+    "devDependencies": {
+        "browserify": "~10.2.4",
+        "es5-shim": "~4.1.10",
+        "ghostface": "~1.4.0",
+        "multiview": "~2.2.5",
+        "phantomjs": "~1.9.18",
+        "tape": "~4.2.0",
+        "ws": "~0.8.0",
+        "samsaara": "git://github.com/arjunmehta/node-samsaara.git"
+    },
+    "scripts": {
+        "test": "multiview [browserify test/client.js '|' ghostface] [tape test/test.js] -x 1000",
+        "test-multi": "multiview [browserify test/client.js '|' ghostface] [tape test/test.js]",
+        "test-clientremote": "browserify test/clientRemote.js | ghostface"
+    },
+    "keywords": [
+        "samsaara",
+        "authentication",
+        "authenticate",
+        "websockets"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/arjunmehta/node-samsaara-identity.git"
+    },
+    "author": "Arjun Mehta",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/arjunmehta/node-samsaara-identity/issues"
+    },
+    "homepage": "https://github.com/arjunmehta/node-samsaara-identity"
+}
