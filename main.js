@@ -25,28 +25,15 @@ module.exports = {
     initialize: function(extender, capability, options) {
 
         Identity = require('./lib/identity').initialize(extender.core, identities);
+
         extender.addConnectionMethods(this.connectionMethods);
+        extender.addCoreObjects(this.coreObjects);
+        extender.addConnectionPreInitialization(this.connectionPreInitialization);
 
         return this;
     },
 
-    coreMethods: {
-
-        identity: function(type, value) {
-            if (identities[type] !== undefined && identities[type][value] !== undefined) {
-                return identities[type][value];
-            }
-
-            return null;
-        },
-
-        removeIdentityType: function(type) {
-            if (identities[type]) {
-                identities[type].remove();
-            }
-
-            return true;
-        },
+    coreObjects: {
 
         createIdentityType: function(type) {
             if (identities[type] === undefined) {
@@ -56,24 +43,42 @@ module.exports = {
             return identities[type];
         },
 
-        clearIdentity: function(type, value) {
-            var connections;
-            var i;
+        identityType: function(type) {
+            if (identities[type] !== undefined) {
+                return identities[type];
+            }
 
-            if (identities[type] !== undefined && identities[type][value] !== undefined) {
-                connections = identities[type][value].connnections;
-                for (i = 0; i < connections.length; i++) {
-                    connections[i].unidentify(type);
+            return null;
+        },
+
+        removeIdentityType: function(type) {
+            var identityName;
+
+            if (identities[type]) {
+                for (identityName in identities[type]) {
+                    identities[type][identityName].clearAll();
                 }
+            }
+
+            return true;
+        },
+
+        identity: function(type, value) {
+            if (identities[type] !== undefined && identities[type][value] !== undefined) {
+                return identities[type][value];
+            }
+
+            return null;
+        },
+
+        removeIdentity: function(type, value) {
+            if (identities[type] !== undefined && identities[type][value] !== undefined) {
+                identities[type][value].clearAll();
             }
         }
     },
 
     connectionMethods: {
-
-        identity: function(type) {
-            return this.identities[type];
-        },
 
         identifyAs: function(type, value) {
 
@@ -95,15 +100,8 @@ module.exports = {
             connection.identities[type] = identity;
         },
 
-        unidentify: function(type) {
-
-            var connection = this;
-            var identity = connection.identities[type];
-
-            if (identity !== undefined) {
-                identity.unidentifyConnection(connection.id);
-                connection.identities[type] = undefined;
-            }
+        identity: function(type) {            
+            return this.identities[type];
         },
 
         validateIdentity: function(type, value) {
@@ -112,7 +110,20 @@ module.exports = {
             }
 
             return false;
-        }
+        },
+
+        unidentify: function(type, autoRemove) {
+
+            var connection = this;
+            var identity = connection.identities[type];
+
+            if (identity !== undefined) {
+                identity.unidentifyConnection(connection.id, autoRemove);
+                connection.identities[type] = undefined;
+            }
+        },
+
+        unidentifyAll: function() {}
     },
 
     connectionPreInitialization: function(connection, done) {

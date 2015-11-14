@@ -29,7 +29,7 @@ var samsaara = require('samsaara')
 var identity = require('samsaara-identity')
 
 samsaara
-  .use(identity, ['username'])
+  .use(identity, {identities: ['username']})
   .initialize()
 ```
 
@@ -42,7 +42,9 @@ samsaara.expose({
     var connection = this
 
     checkPassword(userID, password, function(err, success){
-      if(!err && success) connection.identifyAs('username', userID)
+      if(!err && success) {
+        connection.identifyAs('username', userID)
+      }
     })
   },
 
@@ -99,14 +101,14 @@ samsaara.identity('username', userID).connections // will include all connection
 ## API
 
 ### Samsaara
-#### samsaara.identity(identityType, identityValue)
-Returns the `Identity` object with `identityValue` of `identityType`.
+#### samsaara.createIdentityType(identityType)
+Adds an identity with `identityValue` of `identityType` to samsaara.
 
 #### samsaara.removeIdentityType(identityType)
 Removes all identities of `identityType` from samsaara.
 
-#### samsaara.addIdentityType(identityType)
-Adds an identity with `identityValue` of `identityType` to samsaara.
+#### samsaara.identity(identityType, identityValue)
+Returns the `Identity` object with `identityValue` of `identityType`.
 
 #### samsaara.removeIdentity(identityType, identityValue)
 Removes the identity with `identityValue` of `identityType` from samsaara.
