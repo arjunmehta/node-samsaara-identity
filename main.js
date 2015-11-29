@@ -100,7 +100,7 @@ module.exports = {
             connection.identities[type] = identity;
         },
 
-        identity: function(type) {            
+        identity: function(type) {
             return this.identities[type];
         },
 
