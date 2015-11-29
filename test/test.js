@@ -4,19 +4,17 @@ var debug = debugit.add('samsaara:test:identity');
 var test = require('tape').test;
 var TapeFence = require('./tapefence');
 
-var fences = {};
-
 var WebSocketServer = require('ws').Server;
 var samsaara = require('samsaara');
 var identity = require('../main');
 
+var theConnection;
+var fences = {};
 var connectionCount = 0;
 
 var wss = new WebSocketServer({
-    port: 8080
+    port: 8081
 });
-
-var theConnection;
 
 
 // test setup
@@ -72,8 +70,7 @@ test('Global identity methods exist', function(t) {
 
 test('Create Identity Type', function(t) {
 
-    var identityType;
-    identityType = samsaara.createIdentityType('sessionID');
+    var identityType = samsaara.createIdentityType('sessionID');
 
     t.equal(typeof identityType, 'object');
     t.equal(typeof samsaara.identityType('sessionID'), 'object');
@@ -112,6 +109,19 @@ test('Unidentify Connection', function(t) {
     t.equal(theConnection.identity('sessionID'), undefined);
     t.equal(samsaara.identity('sessionID', '123456789'), null);
     t.equal(theConnection.validateIdentity('sessionID', '123456789'), false);
+
+    t.end();
+});
+
+test('Add Subidentity', function(t) {
+
+    samsaara.createIdentityType('userID');
+    theConnection.identifyAs('sessionID', '123456789');
+    samsaara.identity('sessionID', '123456789').identifyAs('userID', 'jambalaya');
+
+    t.equal(theConnection.identity('userID').value, 'jambalaya');
+    t.equal(samsaara.identity('userID', 'jambalaya'), theConnection.identity('userID'));
+    t.equal(theConnection.validateIdentity('userID', 'jambalaya'), true);
 
     t.end();
 });
