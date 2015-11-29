@@ -33,7 +33,7 @@ test('Samsaara initializes', function(t) {
 
     t.plan(1);
 
-    ws = new WebSocket('ws://localhost:8080');
+    ws = new WebSocket('ws://localhost:8081');
 
     samsaara.initialize({
         socket: ws
@@ -46,7 +46,7 @@ test('Samsaara initializes', function(t) {
 test('Wait to Continue', function(t) {
 
     fences['Wait to Continue'] = new TapeFence(1, function(c) {
-        if (c === 'continue') {            
+        if (c === 'continue') {
             t.end();
         }
     });
