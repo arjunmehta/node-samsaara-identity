@@ -126,6 +126,17 @@ test('Add Subidentity', function(t) {
     t.end();
 });
 
+test('Unidentify Subidentity', function(t) {
+
+    theConnection.unidentify('sessionID');
+
+    t.equal(theConnection.identity('userID'), undefined);
+    t.equal(samsaara.identity('userID', 'jambalaya').connections.length, 0);
+    t.equal(theConnection.validateIdentity('userID', 'jambalaya'), false);
+
+    t.end();
+});
+
 test('Hold Test', function(t) {
     setTimeout(function() {
         samsaara.connection('connection0').execute('continueTest')();
