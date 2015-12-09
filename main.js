@@ -4,7 +4,7 @@
  * MIT Licensed
  */
 
-var debug = require('debugit').add('samsaara:identity');
+// var debug = require('debugit').add('samsaara:identity');
 
 var identityList = require('./lib/identityList');
 var Identity = require('./lib/identity');
