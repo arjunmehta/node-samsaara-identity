@@ -1,6 +1,5 @@
-var shim = require('es5-shim');
-var debugit = require('debugit').enable();
-var debug = debugit.add('samsaara:test:identity');
+// var debugit = require('debugit').enable();
+// var debug = debugit.add('samsaara:test:identity');
 
 var WebSocket = require('ws');
 var samsaara = require('samsaara');
@@ -10,6 +9,8 @@ var TapeFence = require('./tapefence');
 var fences = {};
 
 var ws;
+
+require('es5-shim');
 
 
 // test setup
