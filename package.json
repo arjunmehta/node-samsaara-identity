@@ -15,7 +15,7 @@
     "phantomjs": "~1.9.18",
     "samsaara": "git://github.com/arjunmehta/node-samsaara.git",
     "tape": "~4.2.0",
-    "ws": "~0.8.0"
+    "ws": "~7.2.0"
   },
   "scripts": {
     "test": "multiview [browserify test/client.js '|' ghostface] [tape test/test.js] -x 1000 -p",
